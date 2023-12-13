@@ -10,6 +10,7 @@ import com.example.instagramproject.profile.components.ProfileAction
 import com.example.instagramproject.profile.components.ProfileDescription
 import com.example.instagramproject.profile.components.ProfileHeader
 import com.example.instagramproject.profile.components.ProfileInformation
+import com.example.instagramproject.profile.components.ProfilePost
 import com.example.instagramproject.profile.components.ProfileStoryHighlight
 
 @Composable
@@ -17,7 +18,6 @@ fun ProfileScreen() {
     val user = User(
         username = "Ludwin Rodriguez",
         profileImageUrl = "https://via.placeholder.com/200",
-        posts = 15,
         followers = 30,
         following = 15,
         name = "Ludwin Rodriguez",
@@ -31,7 +31,16 @@ fun ProfileScreen() {
             Story(image = "https://via.placeholder.com/200", text = "Story 6"),
             Story(image = "https://via.placeholder.com/200", text = "Story 7"),
             Story(image = "https://via.placeholder.com/200", text = "Story 8"),
-        )
+        ),
+        posts = listOf(
+            "https://via.placeholder.com/200",
+            "https://via.placeholder.com/200",
+            "https://via.placeholder.com/200",
+            "https://via.placeholder.com/200",
+            "https://via.placeholder.com/200",
+            "https://via.placeholder.com/200",
+            "https://via.placeholder.com/200"
+            )
     )
     Column {
         ProfileHeader(
@@ -42,7 +51,7 @@ fun ProfileScreen() {
         )
         ProfileInformation(
             imageUrl = user.profileImageUrl,
-            posts = user.posts,
+            posts = user.posts.size,
             followers = user.followers,
             following = user.following
         )
@@ -54,7 +63,11 @@ fun ProfileScreen() {
         ProfileAction(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp)
         )
-        ProfileStoryHighlight()
+        ProfileStoryHighlight(
+            stories = user.stories,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp)
+        )
+        ProfilePost(images = user.posts)
     }
 }
 
