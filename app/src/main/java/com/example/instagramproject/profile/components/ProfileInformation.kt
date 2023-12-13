@@ -16,17 +16,21 @@ import coil.compose.AsyncImage
 
 @Composable
 fun ProfileInformation(
+    imageUrl: String,
+    posts: Int,
+    followers: Int,
+    following: Int,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceAround) {
         AsyncImage(
-            model = "https://via.placeholder.com/200",
+            model = imageUrl,
             contentDescription = "profile image",
             modifier = Modifier.clip(CircleShape)
         )
-        ProfileInformationItem(15, "Publicaciones")
-        ProfileInformationItem(30, "Seguidores")
-        ProfileInformationItem(15, "Seguidos")
+        ProfileInformationItem(posts, "Publicaciones")
+        ProfileInformationItem(followers, "Seguidores")
+        ProfileInformationItem(following, "Seguidos")
     }
 }
 
@@ -46,5 +50,10 @@ private fun ProfileInformationItem(
 @Preview(showBackground = true)
 @Composable
 fun ProfileInformationPreview() {
-    ProfileInformation()
+    ProfileInformation(
+        "",
+        150,
+        150,
+        150
+    )
 }

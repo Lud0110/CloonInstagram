@@ -26,6 +26,7 @@ fun ProfileHeader(
     backClick: () -> Unit,
     notificationClick: () -> Unit,
     optionClick: () -> Unit,
+    username: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -39,7 +40,7 @@ fun ProfileHeader(
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "arrow back")
                 }
                 Spacer(modifier = Modifier.width(16.dp))
-                Text(text = "Ludwin Rodriguez", fontWeight = FontWeight.Bold)
+                Text(text = username, fontWeight = FontWeight.Bold)
             }
         }
         ProfileHeaderOptions(notificationClick = notificationClick, optionClick = optionClick)
@@ -66,5 +67,5 @@ private fun ProfileHeaderOptions(
 @Preview(showBackground = true)
 @Composable
 fun ProfileHeaderPreview() {
-    ProfileHeader({}, {}, {})
+    ProfileHeader({}, {}, {}, "Ludwin Rodriguez")
 }
