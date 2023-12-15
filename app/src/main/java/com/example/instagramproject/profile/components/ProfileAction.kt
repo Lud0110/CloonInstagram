@@ -29,7 +29,7 @@ fun ProfileAction(
 private fun ProfileButton(onClick: () -> Unit, text: String, modifier: Modifier = Modifier){
     Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray),
+        colors = ButtonDefaults.buttonColors(contentColor = Color.LightGray),
         shape = RoundedCornerShape(10.dp),
         modifier = modifier
     ) {
