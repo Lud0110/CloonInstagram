@@ -1,5 +1,7 @@
 package com.example.instagramproject.profile
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -8,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.instagramproject.profile.components.ProfileAction
@@ -62,11 +65,12 @@ fun ProfileScreen() {
     )
 
     val size = 3
+    val context = LocalContext.current
     Column {
         ProfileHeader(
-            backClick = { /*TODO*/ },
-            notificationClick = { /*TODO*/ },
-            optionClick = { /*TODO*/ },
+            backClick = { showToast(context, "Back Button") },
+            notificationClick = { showToast(context, "Notification") },
+            optionClick = { showToast(context, "Options ") },
             username = user.username
         )
         LazyVerticalGrid(columns = GridCells.Fixed(size)) {
@@ -93,6 +97,8 @@ fun ProfileScreen() {
                 GridItemSpan(size)
             }) {
                 ProfileAction(
+                    followClick = { showToast(context, "Follow") },
+                    messageClick = { showToast(context, "Message") },
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
                 )
             }
@@ -101,11 +107,14 @@ fun ProfileScreen() {
             }) {
                 ProfileStoryHighlight(
                     stories = user.stories,
+                    onClick = { showToast(context, "highlight") },
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
                 )
             }
             items(user.posts) {
-                ProfilePostImage(image = it, modifier = Modifier.padding(1.dp))
+                ProfilePostImage(image = it, onClick = {
+                    showToast(context, "Post")
+                }, modifier = Modifier.padding(1.dp))
             }
         }
 
@@ -142,6 +151,9 @@ fun ProfileScreen() {
     }
 }
 
+private fun showToast(context: Context, clickedItem: String) {
+    Toast.makeText(context, "Clicked on $clickedItem!", Toast.LENGTH_SHORT).show()
+}
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {

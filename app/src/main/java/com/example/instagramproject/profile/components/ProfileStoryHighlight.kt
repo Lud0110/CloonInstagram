@@ -1,5 +1,6 @@
 package com.example.instagramproject.profile.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -18,6 +19,7 @@ import com.example.instagramproject.profile.Story
 
 @Composable
 fun ProfileStoryHighlight(
+    onClick: () -> Unit,
     stories: List<Story>,
     modifier: Modifier = Modifier
 ) {
@@ -25,7 +27,7 @@ fun ProfileStoryHighlight(
         modifier = modifier
     ) {
         items(stories) {
-            StoryItem(it)
+            StoryItem(story = it, modifier = modifier.clickable { onClick() })
             Spacer(modifier = Modifier.width(8.dp))
         }
     }
@@ -49,5 +51,5 @@ private fun StoryItem(
 @Preview(showBackground = true)
 @Composable
 fun ProfileStoryHighlightPreview() {
-    ProfileStoryHighlight(emptyList())
+    ProfileStoryHighlight({}, emptyList())
 }
